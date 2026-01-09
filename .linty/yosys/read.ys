@@ -17,4 +17,3 @@ verific -vhdl ./src/ram.vhd
 verific -vhdl ./src/reg_bank.vhd
 verific -vhdl ./src/shifter.vhd
 verific -vhdl ./src/uart.vhd
-verific -vhdl ./toto/toto.vhd
