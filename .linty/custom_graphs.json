@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1",
+    "title": "My custom graph 1",
+    "command": "select o:SD_UDM %cie*;"
+  },
+  {
+    "id": "2",
+    "title": "balfdsqkjqsmlkfjqslm",
+    "command": "select w:u2_ddr.byte_we_reg2 %coe*;"
+  }
+]
