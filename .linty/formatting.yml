@@ -1,0 +1,6 @@
+vhdl:
+  # Spaces per indent level. Missing or invalid uses 2.
+  indentation: 2
+
+  # Keyword case: lowercase, uppercase, or keep. Missing or unknown uses keep.
+  keyword-case: lowercase
