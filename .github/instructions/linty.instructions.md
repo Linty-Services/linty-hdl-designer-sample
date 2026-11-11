@@ -1,0 +1,12 @@
+---
+applyTo: "**"
+description: Use the Linty MCP tools when generating or editing VHDL, Verilog, SystemVerilog, or Tcl, and fix Linty and post-synthesis problems on code you added or updated
+---
+
+Pass `workspace` as the absolute path of the current workspace on every Linty tool call. That selects the folder and its connected Linty project.
+
+Before generating VHDL, Verilog, SystemVerilog, or Tcl, call `list_guidelines` for that language and follow the active rules. Call `describe_rule` when a rule name is not enough. Call `project_scope` and do not edit files it reports as excluded.
+
+After writing or editing a file, read the Linty diagnostics in the Problems panel on the code you added or updated. Fix each of those problems you can fix in the source. Leave problems on code you did not add or change. Call `describe_rule` with the rule key when the message is not enough. When no such problem remains, call `format_file` with `apply` true on each file you edited. Call `outline` to see entities, modules, processes, procs, and namespaces. Call `design_query` to find instantiations, uses of a signal, or its clock domain. Call `rename_symbol` to rename a port, signal, or proc and apply the returned edits when they are the names you intended to change.
+
+After you change VHDL, Verilog, or SystemVerilog, update `.linty/yosys/read.ys` and `.linty/yosys/hierarchy.ys` so they match the design, then call `regenerate_report`. Paths in `read.ys` are relative to the workspace root. Use `verific -vhdl ./file.vhd` for VHDL and `verific -sv ./file.sv` for Verilog and SystemVerilog. Keep existing include-directory, define, library, and file-list lines. If the script reads a file list with `verific -f`, update that list. When the top entity or module changes, set `hierarchy -top <name>` in `hierarchy.ys` and keep the other lines in that file. `regenerate_report` runs local analysis and opens the Linty report. Read its log when the exit code is not 0. When the exit code is 0, call `post_synthesis_problems` with `paths` set to the files you added or updated. Fix each returned problem you can fix in the source. Leave problems on code you did not add or change. Call `describe_rule` with `code` when the message is not enough. If that fix changes VHDL, Verilog, or SystemVerilog, update the Yosys scripts when the design changes, call `regenerate_report` again, and call `post_synthesis_problems` again for the files you changed. Leave `.linty/work/bugfinder/problems.json` unread.
